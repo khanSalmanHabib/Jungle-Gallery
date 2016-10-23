@@ -1,0 +1,78 @@
+﻿<div class="row col-md-12">
+    <div class="navbar-logo col-md-2">
+
+            <a href="@Url.Action("Index", "Home")" class="dropbtni"><img src="~/Assets/Images/Jungle Gallery.png" height="160" width="160" /> </a>
+
+    </div>
+
+    <div class="navbar-article col-md-10">
+        <br>
+        <ul>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="dropdowni col-md-2 col-md-offset-1">
+                    <a href="@Url.Action("Portfolio", "ProjectStories")" class="dropbtni">Postfolio</a>
+                    <div class="dropdown-contenti">
+                        <a href="@Url.Action("MobileGame", "ProjectStories")">Mobile Game</a>
+                        <a href="@Url.Action("MobileApplication", "ProjectStories")">Mobile Application</a>
+
+                        <a href="@Url.Action("WebApplication", "ProjectStories")">Web Application</a>
+                        <a href="@Url.Action("DesktopApplication", "ProjectStories")">Desktop Application</a>
+                    </div>
+                </li>
+
+
+                <li class="dropdowni col-md-2">
+                    <a href="@Url.Action("Index", "Users")" class="dropbtni">User</a>                   
+                </li>
+
+
+                <li class="dropdowni col-md-2 ">
+                    <a href="@Url.Action("Index", "ProjectStories")" class="dropbtni">Projects</a>    
+                </li>
+                <li class="dropdowni col-md-2"><a href="#news">Services</a></li>
+
+
+                <li class="dropdowni col-md-2 "><a href="@Url.Action("Logout", "Accounts")">Logout</a></li>
+
+            }
+            else
+            {
+                <li class="dropdowni col-md-2 col-md-offset-1">
+                    <a href="@Url.Action("Company", "Home")" class="dropbtni">Company</a>             
+                </li>
+                <li class="dropdowni col-md-2">
+                    <a href="@Url.Action("Index", "Service")" class="dropbtni">Services</a>
+                    <div class="dropdown-contenti">               
+                        <a href="@Url.Action("MobileApplicationDevelopment", "Service")">Mobile Development</a>
+                        <a href="@Url.Action("WebApplicationDevelopment", "Service")">Web Development</a>
+                        <a href="@Url.Action("DesktopApplicationDevelopment", "Service")">Desktop Development</a>
+                    </div>
+                </li>
+
+
+                <li class="dropdowni col-md-2">
+                    <a href="@Url.Action("Portfolio", "ProjectStories")" class="dropbtni">Postfolio</a>
+                    <div class="dropdown-contenti">
+                        <a href="@Url.Action("MobileGame", "ProjectStories")">Mobile Game</a>
+                        <a href="@Url.Action("MobileApplication", "ProjectStories")">Mobile Application</a>
+
+                        <a href="@Url.Action("WebApplication", "ProjectStories")">Web Application</a>
+                        <a href="@Url.Action("DesktopApplication", "ProjectStories")">Desktop Application</a>
+                    </div>
+                </li>
+                <li class="dropdowni col-md-2"><a href="@Url.Action("Contact", "Home")">Contacts</a></li>
+
+                <li class="dropdowni col-md-2"><a href="@Url.Action("Blog", "Home")">Blog</a></li>
+                @*<li class="dropdowni col-md-2"><a href="@Url.Action("Login", "Accounts")">Login</a></li>*@
+
+            }
+
+
+
+
+        </ul>
+        <br>
+    </div>
+</div>

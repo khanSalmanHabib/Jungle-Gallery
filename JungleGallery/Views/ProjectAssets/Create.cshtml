@@ -1,0 +1,184 @@
+﻿@model JungleGallery.Models.ProjectAsset
+@{
+    ViewBag.Title = "Create";
+
+
+}
+<style>
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+</style>
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "ProjectAssets", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+
+
+    <div class="form-horizontal ">
+        <h4>ProjectAsset</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Type", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text = "Audio", Value = "Audio" },
+                    new SelectListItem{ Text = "Video", Value = "Video" },
+                    new SelectListItem{ Text = "Image", Value = "Image" }
+                }, new { onchange = "getAlldata()", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.Detail, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Detail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Detail, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Details, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-9">
+                        @Html.TextAreaFor(model => model.Details, new { @class = "form-control", @row = 5 })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+
+                        @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                @*<div class="form-group">
+                        <div class="col-md-10">
+                            @Html.HiddenFor(model => model.Location, new { Value = "" })
+                            @Html.Hidden("Location", (string)@ViewBag.Location)
+                            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.HiddenFor(model => model.Location, new { Value = "_" })
+                        @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div>
+                    @Html.Hidden("ProjectStoryID", (Int32)@ViewBag.ProjectStoryID)
+                    @Html.ValidationMessageFor(model => model.ProjectStoryID, "", new { @class = "text-danger" })
+                </div>
+
+
+
+
+
+
+                <div class="form-group">
+                    @Html.Label("Image", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <label class="btn btn-default btn-file col-md-2">
+                            Browse <input type="file" id="Photo" name="upload" style="display: none;" onchange="readURL(this);">
+                        </label>
+
+
+                    </div>
+                </div>
+
+
+                @*<div class="form-group">
+                        @Html.Label("Image", new { @class = "control-label col-md-2" })
+                        <div>
+                            <input type="file" id="Photo" name="upload" />
+                        </div>
+                    </div>*@
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="col-md-4">
+                <img id="ox" src="@Url.Content("~/Assets/Images/Blank.jpg")" />
+            </div>
+
+        </div>
+    </div>
+
+
+
+}
+
+
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/Scripts/summernote/home-index.js")
+    <script>
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#ox')
+                        .attr('src', e.target.result)
+                        .width(300)
+                        .height(400);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+}

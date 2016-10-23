@@ -1,0 +1,78 @@
+﻿@model JungleGallery.ViewModels.DetailViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProjectStory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectStory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectStory.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectStory.Platform)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectStory.Platform)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectStory.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectStory.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectStory.Details)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.ProjectStory.Details)
+        </dd>
+
+    </dl>
+
+
+
+
+
+
+
+
+
+
+    <div class="flexslider">
+        <ul class="slides">
+
+            @foreach (var item in Model.ProjectAssets)
+            {
+                <li>
+                    <img src="@Url.Content(item.Location)" alt="Image"/>
+                    <div class="flex-caption">
+                        <h3>Lorem ipsum dolor sit amet</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In venenatis porttitor massa eget pretium. Mauris vel erat sem, id tempor est. Pellentesque lobortis iaculis massa quis auctor.</p>
+                    </div>
+                </li>
+            }
+
+        </ul>
+    </div>
+    <span id="responsiveFlag"></span>
+
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/Flexslider/flex_main.js"></script>
+}
